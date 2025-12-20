@@ -16,3 +16,9 @@ export async function getProducts() {
   });
   return formateData(products);
 }
+
+export async function getOneProduct(slug: string) {
+  return await prisma.product.findFirst({
+    where: { slug: slug },
+  });
+}

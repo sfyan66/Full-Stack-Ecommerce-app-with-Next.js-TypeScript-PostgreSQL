@@ -4,10 +4,11 @@ const ProductPrice = ({
   value,
   className,
 }: {
-  value: string;
+  value: number;
   className?: string;
 }) => {
-  const [int, float] = value.split(".");
+  const valueStr = value.toFixed(2);
+  const [int, float] = valueStr.split(".");
   return (
     <p className={cn("text-2xl", className)}>
       <span className="text-sm align-super">$</span>

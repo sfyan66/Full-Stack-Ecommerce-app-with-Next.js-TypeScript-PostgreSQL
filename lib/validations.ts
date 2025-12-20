@@ -1,10 +1,12 @@
 import { z } from "zod";
 import { formatePrice } from "./utils";
 
-const priceSchema = z.string().refine((val) => {
-  const regex = /^\d+(\.\d{2})?$/;
-  return regex.test(formatePrice(Number(val)));
-}, "The price must be a valid number with two float numbers");
+const priceSchema = z
+  .string()
+  .refine(
+    (val) => /^\d+(\.\d{2})?$/.test(formatePrice(Number(val))),
+    "The price must be a valid number with two float numbers"
+  );
 
 export const productSchema = z.object({
   name: z.string().min(3, "The product name must be at least 3 characters"),
