@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sheet";
 import { EllipsisVertical, ShoppingCart, UserIcon } from "lucide-react";
 import Link from "next/link";
+import UserButton from "./user-icon";
 
 const Menu = () => {
   return (
@@ -20,12 +21,7 @@ const Menu = () => {
             Cart
           </Link>
         </Button>
-        <Button asChild>
-          <Link href={"/sign-in"}>
-            <UserIcon />
-            Sign-in
-          </Link>
-        </Button>
+        <UserButton />
       </nav>
       <nav className="md:hidden">
         <Sheet>
@@ -41,12 +37,7 @@ const Menu = () => {
                 Cart
               </Link>
             </Button>
-            <Button asChild>
-              <Link href={"/sign-in"}>
-                <UserIcon />
-                Sign-in
-              </Link>
-            </Button>
+            <UserButton />
           </SheetContent>
         </Sheet>
       </nav>

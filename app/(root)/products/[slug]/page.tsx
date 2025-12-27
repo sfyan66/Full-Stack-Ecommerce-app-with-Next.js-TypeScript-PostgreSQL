@@ -10,9 +10,9 @@ import Image from "next/image";
 // import { auth } from '@/auth';
 // import Rating from '@/components/shared/product/rating';
 
-const ProductDetailsPage = async (props: {
+export default async function ProductDetailsPage(props: {
   params: Promise<{ slug: string }>;
-}) => {
+}) {
   const { slug } = await props.params;
 
   const product = await getOneProduct(slug);
@@ -98,6 +98,4 @@ const ProductDetailsPage = async (props: {
       </section> */}
     </>
   );
-};
-
-export default ProductDetailsPage;
+}

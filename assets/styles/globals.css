@@ -3,6 +3,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@utility form-error {
+  @apply text-red-900 text-sm mt-1;
+}
 @layer utilities {
   .wrapper {
     @apply max-w-7xl mx-auto p-5 md:px-10 w-full;
