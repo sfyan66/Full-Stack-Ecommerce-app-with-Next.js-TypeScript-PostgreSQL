@@ -37,6 +37,8 @@ const SignUpForm = () => {
     message: "",
   });
 
+  console.log(state.message);
+
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
@@ -115,6 +117,9 @@ const SignUpForm = () => {
         <div>
           <SignUpButton />
         </div>
+        {state && !state.success && (
+          <div className="text-center text-destructive">{state.message}</div>
+        )}
         <div className="text-sm text-center text-muted-foreground">
           Already have an account?{" "}
           <Link href="/sign-in" target="_self" className="link">

@@ -12,6 +12,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: {
     strategy: "jwt",
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   adapter: PrismaAdapter(prisma) as any,
   providers: [
     CredentialsProvider({
@@ -45,16 +46,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
+    async session({ session, user, token }) {
+      session.user.id = token.sub;
+      session.user.role = token.role;
+      session.user.name = token.name;
+
+      return session;
+    },
     async jwt({ token, user }) {
       if (user) {
+        token.id = user.id;
         token.role = user.role;
       }
       return token;
-    },
-    async session({ session, token }) {
-      session.user.id = token.sub;
-      session.user.role = token.role;
-      return session;
     },
   },
 });

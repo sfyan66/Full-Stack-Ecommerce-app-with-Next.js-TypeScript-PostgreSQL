@@ -1,0 +1,97 @@
+InformationTechnologyIT = `is the application of computers and telecommunications
+  equipment to store, retrieve, transmit, and manipulate data. More formally`;
+
+Definition = `(IT) encompasses the 
+  entire spectrum of tools, methods, and resources used to create, process,  store,  
+  secure,  retrieve,  and exchange electronic data. It is a broad field that spans 
+  various technical disciplines and plays a critical role in modern society.`;
+
+Trend 1: The AI Revolution and Data Team Formation
+  The ultimate goal of AI is to enable machines to perform tasks that typically require human intelligence.
+
+Trend 2: Cloud Computing and Serverless Architecture
+  Cloud Computing is the delivery of on-demand computing services—including servers, storage, databases, networking, and software—over the Internet ("the cloud").
+    -Infrastructure as a Service (IaaS)
+    -Platform as a Service (PaaS)
+    -Software as a Service (SaaS)
+
+Trend 3: Cybersecurity and the Zero Trust Model
+    -Identity-First Security
+    -AI-Driven Attacks
+    -Supply Chain Risk
+  Zero Trust: operating on the principle of"never trust, always verify."
+
+Trend 4: The Internet of Things (IoT)
+  the vast network of physical objects ("things") embedded with sensors, software, and other technologies for the purpose of connecting and exchanging data with other devices and systems over the internet.
+    -devices/sensors themselves
+    -connectivity (like Wi-Fi or 5G) 
+    -data processing
+    -user interfac
+
+AIoT (Artiﬁcial Intelligence of Things)
+  enabling connected "things" (sensors, appliances) to learn, predict, and act autonomously without constant human/cloud input.
+    -fasterdecision-making 
+    -reduces internet bandwidth usage 
+    -and improves privacy =>  byprocessing data locally before sending it to the cloud.
+
+Edge Computing 
+  Distributed computing paradigm where data processing occurs near the source (e.g., on-device, gateways, or local servers) rather than centralized clouds, minimizing latency and bandwidth use for time-sensitive apps.
+
+Intellectual property (IP)
+  is used to describe works of the mind—such as art, books, films, formulas, inventions, music, and software that are owned or created by a single person or group.
+    -IP is a creation of the mind that has commercial value.
+
+Plagiarism
+  copying text or ideas from someone else and claiming them as your own
+    
+Hoaxes
+  anything designed to deceive another person
+
+Online Reputation
+  It is the perception that people form about you based on all the information about you that exists online.
+
+########################################################################################
+########################################################################################
+
+
+The Hacker's Toolkit
+  Port Scanners
+    Tools like Nmap are used to scan a target network to see which ports are open. An open port can indicate a running service (like a web server or database) that might be vulnerable.
+  Vulnerability Scanners
+    Software like Nessus or OpenVAS automatically scans systems for known vulnerabilities, such as unpatched software or misconfigurations.
+  Password Crackers
+    Programs like John the Ripper or Hashcat are used to guess or "crack" user passwords, often by trying millions of combinations (a brute-force attack) or using lists of common passwords (a dictionary attack).
+  Network Analyzers (Sniffers)
+    Tools like Wireshark capture and inspect data packets traveling over a network. If the traffic is unencrypted, an attacker can read sensitive information like usernames and passwords.
+  Exploitation Frameworks
+    Platforms like Metasploit bundle together a vast collection of known exploits, allowing an attacker to easily launch attacks against vulnerable systems once a weakness is identified.
+
+Malware
+  Malicious software designed to harm devices, steal information, or perform unauthorized actions.
+
+Phishing Attacks
+  Fraudulent attempts to obtain sensitive information by impersonating a trustworthy entity.
+
+SIM Swapping
+  A technique where attackers convince a mobile carrier to transfer a victim's phone number to a new SIM card controlled by the attacker.
+
+Man-in-the-Middle (MitM) Attacks
+  An attack where the attacker intercepts communication between two parties without their knowledge.
+
+Ransomware
+  Malicious software that encrypts a victim's data, demanding a ransom for decryption.
+
+Spyware
+  Software that secretly monitors user activity and collects personal information without consent.
+
+mobile phone attacks
+  1. User Behavior
+  2. Social Engineering
+  3. Vulnerabilities in Operating Systems
+  4. Public Wi-Fi Risks
+  5. Availability of Tools
+  6. Device Proliferation
+  7. Lack of Security Measures
+
+Identity and Access Management (IAM)
+  The first line of defense is proving that you are who you say you are. This is the core of Identity and Access Management (IAM).
