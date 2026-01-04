@@ -22,11 +22,6 @@ export async function signInUser(prevState: FormState, formData: FormData) {
 
     return { success: true, message: "Signed In Successfully" };
   } catch (error) {
-    console.log(error.name);
-    console.log(error.code);
-    console.log(error.meta?.target);
-    console.log(error.message);
-
     if (isRedirectError(error)) {
       throw error;
     }

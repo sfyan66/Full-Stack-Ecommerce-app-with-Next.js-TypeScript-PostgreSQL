@@ -3,6 +3,8 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/db/prisma";
 import { compare } from "bcrypt-ts-edge";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
@@ -59,6 +61,24 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.role = user.role;
       }
       return token;
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    authorized({ request, auth }: any) {
+      if (!request.cookies.get("sessionCartId")) {
+        const sessionCartId = crypto.randomUUID();
+
+        const reqHeaders = new Headers(request.headers);
+
+        const response = NextResponse.next({
+          request: {
+            headers: reqHeaders,
+          },
+        });
+
+        response.cookies.set("sessionCartId", sessionCartId);
+
+        return response;
+      } else return true;
     },
   },
 });

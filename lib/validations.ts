@@ -14,7 +14,7 @@ export const signUpSchema = z
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Confirm Password does not match ",
+    message: "Confirm Password does not match",
     path: ["confirmPassword"],
   });
 
@@ -40,34 +40,21 @@ export const productSchema = z.object({
   price: priceSchema,
 });
 
-// export const signUpValidation = async (
-//   errors: Errors,
-//   { name, email, password, confirmPassword }: UserName
-// ) => {
-//   if (!name) {
-//     errors.name = "Please enter your user name";
-//   } else if (name.length <= 3) {
-//     errors.name = "User name must be at least 4 chars";
-//   }
+export const cartItemSchema = z.object({
+  productId: z.string().min(1, "Product is required"),
+  name: z.string().min(1, "Name is required"),
+  slug: z.string().min(1, "Slug is required"),
+  qty: z.number().int().nonnegative("Quantity must be a positive number"),
+  image: z.string().min(1, "Image is required"),
+  price: priceSchema,
+});
 
-//   const emailRe = new RegExp(
-//     "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._]+\\.[a-zA-Z]{2,}$",
-//     "i"
-//   );
-
-//   if (!email) {
-//     errors.email = "Please enter your email adress";
-//   } else if (!emailRe.test(email)) {
-//     errors.email = "Please enter a valid email adress";
-//   }
-
-//   if (password.length <= 7) {
-//     errors.password = "Password must be at least 8 chars";
-//   }
-
-//   if (password !== confirmPassword) {
-//     errors.confirmPassword = "Passwords do not match";
-//   }
-
-//   return errors;
-// };
+export const insertCartSchema = z.object({
+  items: z.array(cartItemSchema),
+  itemsPrice: priceSchema,
+  totalPrice: priceSchema,
+  shippingPrice: priceSchema,
+  taxPrice: priceSchema,
+  sessionCartId: z.string().min(1, "Session cart id is required"),
+  userId: z.string().optional().nullable(),
+});

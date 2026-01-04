@@ -5,6 +5,7 @@ import { APP_NAME } from "@/lib/constants/index";
 import { APP_DESC } from "@/lib/constants/index";
 import { SERVER_URL } from "@/lib/constants/index";
 import { ThemeProvider } from "next-themes";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body className={`${inter.className}  antialiased`}>
         <ThemeProvider attribute={"class"} defaultTheme="dark" enableSystem>
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
