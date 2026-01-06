@@ -2,9 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import ProductPrice from "./product-price";
-import { ProductType } from "@/types";
+import { Product } from "@/types";
 
-const ProductCard = ({ product }: { product: ProductType }) => {
+const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div>
       <Card key={product.slug} className="h-full">

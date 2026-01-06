@@ -1,11 +1,12 @@
 import { z } from "zod";
 import {
-  productSchema,
-  cartItemSchema,
   insertCartItemSchema,
+  cartItemSchema,
+  insertproductSchema,
+  shippingAddressSchema,
 } from "@/lib/validations";
 
-export type Product = z.infer<typeof productSchema> & {
+export type Product = z.infer<typeof insertproductSchema> & {
   id: string;
   rating: string;
   numReviews: number;
@@ -13,7 +14,7 @@ export type Product = z.infer<typeof productSchema> & {
 };
 
 export type CartItem = z.infer<typeof cartItemSchema>;
-export type InsertCartItem = z.infer<typeof insertCartItemSchema>;
+export type Cart = z.infer<typeof insertCartItemSchema>;
 
 export type Errors = {
   name?: string;
@@ -35,3 +36,5 @@ export type FormState = {
   success?: boolean;
   message?: string;
 };
+
+export type ShippingAddress = z.infer<typeof shippingAddressSchema>;

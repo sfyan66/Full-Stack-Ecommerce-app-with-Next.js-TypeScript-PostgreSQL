@@ -5,7 +5,7 @@ import { getOneProduct } from "@/lib/actions/productsaction";
 import { notFound } from "next/navigation";
 import ProductPrice from "@/components/shared/product/product-price";
 import Image from "next/image";
-// import { getMyCart } from '@/lib/actions/cart.actions';
+import { getCart } from "@/lib/actions/cartaction";
 // import ReviewList from './review-list';
 // import { auth } from '@/auth';
 // import Rating from '@/components/shared/product/rating';
@@ -17,6 +17,8 @@ export default async function ProductDetailsPage(props: {
 
   const product = await getOneProduct(slug);
   if (!product) notFound();
+
+  const cart = await getCart();
 
   return (
     <>
@@ -71,6 +73,7 @@ export default async function ProductDetailsPage(props: {
                 {product.stock > 0 && (
                   <div className="flex-center">
                     <AddToCart
+                      cart={cart}
                       item={{
                         productId: product.id,
                         name: product.name,

@@ -25,7 +25,7 @@ const priceSchema = z
     "The price must be a valid number with two float numbers"
   );
 
-export const productSchema = z.object({
+export const insertproductSchema = z.object({
   name: z.string().min(3, "The product name must be at least 3 characters"),
   slug: z.string().min(3, "The slug must be at least 3 characters"),
   category: z.string().min(3, "The category must be at least 3 characters"),
@@ -49,7 +49,7 @@ export const cartItemSchema = z.object({
   price: priceSchema,
 });
 
-export const insertCartSchema = z.object({
+export const insertCartItemSchema = z.object({
   items: z.array(cartItemSchema),
   itemsPrice: priceSchema,
   totalPrice: priceSchema,
@@ -57,4 +57,14 @@ export const insertCartSchema = z.object({
   taxPrice: priceSchema,
   sessionCartId: z.string().min(1, "Session cart id is required"),
   userId: z.string().optional().nullable(),
+});
+
+export const shippingAddressSchema = z.object({
+  fullName: z.string().min(3, "Name must be at least 3 characters"),
+  streetAddress: z.string().min(3, "Address must be at least 3 characters"),
+  city: z.string().min(3, "City must be at least 3 characters"),
+  postalCode: z.string().min(3, "Postal code must be at least 3 characters"),
+  country: z.string().min(3, "Country must be at least 3 characters"),
+  lat: z.number().optional(),
+  lng: z.number().optional(),
 });
