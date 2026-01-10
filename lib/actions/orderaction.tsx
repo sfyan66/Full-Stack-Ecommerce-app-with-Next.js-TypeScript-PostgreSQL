@@ -7,6 +7,7 @@ import { insertOrderSchema } from "../validations";
 import { prisma } from "@/db/prisma";
 import { CartItem } from "@/types";
 import { formateDataToPlain, formatError } from "../utils";
+import { PAGE_SIZE } from "../constants";
 
 export const createOrder = async () => {
   try {
@@ -16,6 +17,7 @@ export const createOrder = async () => {
     const cart = await getCart();
 
     const userId = session?.user?.id;
+    if (!userId) throw new Error("User id not Found");
     const user = await getUserById(userId);
     if (!user) throw new Error("User not Found");
 
@@ -105,4 +107,31 @@ export const getOrderById = async (orderId: string) => {
   });
 
   return formateDataToPlain(data);
+};
+
+export const getUserOrders = async ({
+  limit = PAGE_SIZE,
+  page,
+}: {
+  limit?: number;
+  page: number;
+}) => {
+  const session = await auth();
+  if (!session) throw new Error("User not authorized");
+
+  const data = await prisma.order.findMany({
+    where: { userId: session?.user?.id },
+    orderBy: { createdAt: "desc" },
+    take: limit,
+    skip: (page - 1) * limit,
+  });
+
+  const ordersCount = await prisma.order.count({
+    where: { userId: session?.user?.id },
+  });
+
+  return {
+    data,
+    totalPages: Math.ceil(ordersCount / limit),
+  };
 };

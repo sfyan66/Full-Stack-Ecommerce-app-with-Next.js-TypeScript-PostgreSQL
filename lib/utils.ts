@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { ZodIssue } from "zod";
+import qs from "query-string";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -30,17 +31,22 @@ export function formatInputErrors(error: any) {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function formatError(error: any) {
-  if (
+  if (error.name === "ZodError") {
+    // Handle Zod error
+    const fieldErrors = Object.keys(error.errors).map(
+      (field) => error.errors[field].message
+    );
+
+    return fieldErrors.join(". ");
+  } else if (
     error.name === "PrismaClientKnownRequestError" &&
     error.code === "P2002"
   ) {
-    const match = error.message.match(/\(`([^`]+)`\)/);
-    // const field = error.meta?.target ? error.meta?.target[0] : "Field";
-    const field = match[1];
-    return `${
-      match[1].charAt(0).toUpperCase() + field.slice(1)
-    } already exists`;
-  } else if (error.name !== "ZodError") {
+    // Handle Prisma error
+    const field = error.meta?.target ? error.meta.target[0] : "Field";
+    return `${field.charAt(0).toUpperCase() + field.slice(1)} already exists`;
+  } else {
+    // Handle other errors
     return typeof error.message === "string"
       ? error.message
       : JSON.stringify(error.message);
@@ -112,4 +118,23 @@ export const formatDateTime = (dateString: Date) => {
     dateOnly: formattedDate,
     timeOnly: formattedTime,
   };
+};
+
+export const formUrlQuery = ({
+  params,
+  key,
+  value,
+}: {
+  params: string;
+  key: string;
+  value: string;
+}) => {
+  const query = qs.parse(params);
+
+  query[key] = value;
+
+  return qs.stringifyUrl(
+    { url: window.location.pathname, query },
+    { skipNull: true }
+  );
 };
