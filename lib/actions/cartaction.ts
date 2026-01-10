@@ -4,7 +4,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/db/prisma";
 import type { CartItem } from "@/types";
 import { cookies } from "next/headers";
-import { formateData, formatError, round2 } from "../utils";
+import { formateDataToPlain, formatError, round2 } from "../utils";
 import { cartItemSchema, insertCartItemSchema } from "../validations";
 import { revalidatePath } from "next/cache";
 import { Prisma } from "../generated/prisma/client";
@@ -15,7 +15,7 @@ const sumPrice = (items: CartItem[]) => {
   );
   const shippingPrice = round2(itemsPrice > 100 ? 0 : 5);
   const taxPrice = round2(itemsPrice * 0.1);
-  const totalPrice = round2(itemsPrice + shippingPrice);
+  const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
 
   return {
     itemsPrice: itemsPrice.toFixed(2),
@@ -117,7 +117,7 @@ export async function getCart() {
 
   if (!cart) return undefined;
 
-  return formateData({
+  return formateDataToPlain({
     ...cart,
     items: cart.items as CartItem[],
     itemsPrice: cart.itemsPrice.toString(),

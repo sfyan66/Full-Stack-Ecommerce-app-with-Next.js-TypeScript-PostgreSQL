@@ -4,6 +4,8 @@ import {
   cartItemSchema,
   insertproductSchema,
   shippingAddressSchema,
+  insertOrderItemSchema,
+  insertOrderSchema,
 } from "@/lib/validations";
 
 export type Product = z.infer<typeof insertproductSchema> & {
@@ -38,3 +40,15 @@ export type FormState = {
 };
 
 export type ShippingAddress = z.infer<typeof shippingAddressSchema>;
+export type OrderItem = z.infer<typeof insertOrderItemSchema>;
+export type Order = z.infer<typeof insertOrderSchema> & {
+  id: string;
+  createdAt: Date;
+  isPaid: boolean;
+  paidAt: Date | null;
+  isDelivered: boolean;
+  deliveredAt: Date | null;
+  orderitems: OrderItem[];
+  user: { name: string; email: string };
+  // paymentResult: PaymentResult;
+};
