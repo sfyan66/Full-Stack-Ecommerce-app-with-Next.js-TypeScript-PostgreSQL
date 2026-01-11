@@ -5,7 +5,7 @@ export const SERVER_URL = process.env.SERVER_URL || "http://localhost:3000";
 
 export const PAYMENT_METHOD = process.env.PAYMENT_METHOD
   ? process.env.PAYMENT_METHOD.split(", ")
-  : ["PayPal", "Stripe", "CreditCard"];
+  : ["PayPal", "Stripe", "CreditCard", "CashOnDelivery"];
 export const DEFAULT_PAYMENT_METHOD =
   process.env.DEFAULT_PAYMENT_METHOD || "PayPal";
 

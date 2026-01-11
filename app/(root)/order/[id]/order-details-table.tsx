@@ -17,11 +17,14 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useTransition } from "react";
+import { deliverOrder, updateOrderToPaidAFF } from "@/lib/actions/orderaction";
 
 const OrderDetailsTable = ({
   order,
+  isAdmin,
 }: {
   order: Omit<Order, "paymentResult">;
+  isAdmin: boolean;
 }) => {
   const {
     id,
@@ -74,53 +77,49 @@ const OrderDetailsTable = ({
   //   });
   // };
 
-  // // Button to mark order as paid
-  // const MarkAsPaidButton = () => {
-  //   const [isPending, startTransition] = useTransition();
-  //   const { toast } = useToast();
+  const MarkAsPaidButton = () => {
+    const [isPending, startTransition] = useTransition();
 
-  //   return (
-  //     <Button
-  //       type='button'
-  //       disabled={isPending}
-  //       onClick={() =>
-  //         startTransition(async () => {
-  //           const res = await updateOrderToPaidCOD(order.id);
-  //           toast({
-  //             variant: res.success ? 'default' : 'destructive',
-  //             description: res.message,
-  //           });
-  //         })
-  //       }
-  //     >
-  //       {isPending ? 'processing...' : 'Mark As Paid'}
-  //     </Button>
-  //   );
-  // };
+    return (
+      <Button
+        type="button"
+        disabled={isPending}
+        onClick={() =>
+          startTransition(async () => {
+            const res = await updateOrderToPaidAFF(order.id);
+            if (!res.success) {
+              toast.error(res.message);
+            }
+            toast.success(res.message);
+          })
+        }
+      >
+        {isPending ? "processing..." : "Mark As Paid"}
+      </Button>
+    );
+  };
 
-  // // Button to mark order as delivered
-  // const MarkAsDeliveredButton = () => {
-  //   const [isPending, startTransition] = useTransition();
-  //   const { toast } = useToast();
+  const MarkAsDeliveredButton = () => {
+    const [isPending, startTransition] = useTransition();
 
-  //   return (
-  //     <Button
-  //       type='button'
-  //       disabled={isPending}
-  //       onClick={() =>
-  //         startTransition(async () => {
-  //           const res = await deliverOrder(order.id);
-  //           toast({
-  //             variant: res.success ? 'default' : 'destructive',
-  //             description: res.message,
-  //           });
-  //         })
-  //       }
-  //     >
-  //       {isPending ? 'processing...' : 'Mark As Delivered'}
-  //     </Button>
-  //   );
-  // };
+    return (
+      <Button
+        type="button"
+        disabled={isPending}
+        onClick={() =>
+          startTransition(async () => {
+            const res = await deliverOrder(order.id);
+            if (!res.success) {
+              toast.error(res.message);
+            }
+            toast.success(res.message);
+          })
+        }
+      >
+        {isPending ? "processing..." : "Mark As Delivered"}
+      </Button>
+    );
+  };
 
   return (
     <>
@@ -240,11 +239,10 @@ const OrderDetailsTable = ({
                 />
               )} */}
 
-              {/* Cash On Delivery */}
-              {/* {isAdmin && !isPaid && paymentMethod === 'CashOnDelivery' && (
+              {isAdmin && !isPaid && paymentMethod === "CashOnDelivery" && (
                 <MarkAsPaidButton />
               )}
-              {isAdmin && isPaid && !isDelivered && <MarkAsDeliveredButton />}  */}
+              {isAdmin && isPaid && !isDelivered && <MarkAsDeliveredButton />}
             </CardContent>
           </Card>
         </div>

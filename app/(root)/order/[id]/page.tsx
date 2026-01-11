@@ -22,12 +22,15 @@ export default async function OrderDetailsPage(props: {
     redirect("/unauthorized");
   }
 
+  console.log(new Date());
+
   return (
     <OrderDetailsTable
       order={{
         ...order,
         shippingAddress: order.shippingAddress as ShippingAddress,
       }}
+      isAdmin={session?.user?.role === "admin" || false}
     />
   );
 }

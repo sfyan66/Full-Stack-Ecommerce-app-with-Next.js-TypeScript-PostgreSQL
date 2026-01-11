@@ -109,3 +109,10 @@ export const updateUserSchema = updateProfileSchema.extend({
   id: z.string().min(1, "ID is required"),
   role: z.string().min(1, "Role is required"),
 });
+
+export const paymentResultSchema = z.object({
+  id: z.string(),
+  status: z.string(),
+  email_address: z.string(),
+  pricePaid: z.string(),
+});
