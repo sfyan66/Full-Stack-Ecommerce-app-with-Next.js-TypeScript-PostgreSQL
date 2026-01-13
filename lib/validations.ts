@@ -34,11 +34,15 @@ export const insertproductSchema = z.object({
   description: z
     .string()
     .min(3, "The description must be at least 3 characters"),
-  stock: z.coerce.number(),
+  stock: z.number(),
   images: z.array(z.string()).min(1, "There must be at least one image"),
   isFeatured: z.boolean(),
   banner: z.string().nullable(),
   price: priceSchema,
+});
+
+export const updateProductSchema = insertproductSchema.extend({
+  id: z.string().min(1, "Id is required"),
 });
 
 export const cartItemSchema = z.object({
