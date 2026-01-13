@@ -119,3 +119,11 @@ export async function updateProduct(data: z.infer<typeof updateProductSchema>) {
     };
   }
 }
+
+export async function getProductById(id: string) {
+  const product = await prisma.product.findFirst({
+    where: { id },
+  });
+
+  return formateDataToPlain(product);
+}

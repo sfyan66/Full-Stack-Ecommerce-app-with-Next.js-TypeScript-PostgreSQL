@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import DeleteDialog from "@/components/shared/delete-dialog";
 import Pagination from "@/components/shared/pagination";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,10 @@ import {
 import { deleteProduct, getAllProducts } from "@/lib/actions/productsaction";
 import { formatCurrency, formatId } from "@/lib/utils";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Admin Products",
+};
 
 export default async function AdminProductsPage(props: {
   searchParams: Promise<{

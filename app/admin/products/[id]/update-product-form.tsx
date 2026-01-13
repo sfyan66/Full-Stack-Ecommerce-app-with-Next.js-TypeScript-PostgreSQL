@@ -45,7 +45,7 @@ const UpdateProductForm = ({
     values
   ) => {
     if (!productId) {
-      router.push("admin/products");
+      router.push("/admin/products");
       return;
     }
 
@@ -55,7 +55,7 @@ const UpdateProductForm = ({
       toast.error(res.message);
     } else {
       toast.success(res.message);
-      router.push("admin/products");
+      router.push("/admin/products");
     }
   };
 

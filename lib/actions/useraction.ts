@@ -6,6 +6,7 @@ import {
   signInSchema,
   shippingAddressSchema,
   paymentMethodSchema,
+  updateUserSchema,
 } from "../validations";
 import { hashSync } from "bcrypt-ts-edge";
 import { prisma } from "@/db/prisma";
@@ -14,6 +15,8 @@ import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { formatError, formatInputErrors } from "../utils";
 import { auth } from "@/auth";
 import z from "zod";
+import { PAGE_SIZE } from "../constants";
+import { Prisma } from "../generated/prisma/client";
 
 export async function signInUser(prevState: FormState, formData: FormData) {
   try {
@@ -172,3 +175,91 @@ export const updateProfile = async (user: { name: string; email: string }) => {
     };
   }
 };
+
+export async function getAllUsers({
+  limit = PAGE_SIZE,
+  page,
+  query,
+}: {
+  limit?: number;
+  page: number;
+  query: string;
+}) {
+  const queryFilter: Prisma.UserWhereInput =
+    query && query !== "all"
+      ? {
+          name: {
+            contains: query,
+            mode: "insensitive",
+          } as Prisma.StringFilter,
+        }
+      : {};
+
+  const data = await prisma.user.findMany({
+    where: {
+      ...queryFilter,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: limit,
+    skip: (page - 1) * limit,
+  });
+
+  const dataCount = await prisma.user.count();
+
+  return {
+    data,
+    totalPages: Math.ceil(dataCount / limit),
+  };
+}
+
+export async function deleteUser(id: string) {
+  try {
+    const user = await prisma.user.findFirst({
+      where: { id },
+    });
+
+    if (!user) throw new Error("User not Found");
+
+    await prisma.user.delete({
+      where: { id: user.id },
+    });
+
+    return {
+      success: true,
+      message: "User deleted successfully",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: formatError(error),
+    };
+  }
+}
+
+export async function updateUser(data: z.infer<typeof updateUserSchema>) {
+  try {
+    const user = updateUserSchema.parse(data);
+    const userExist = await prisma.user.findFirst({
+      where: { id: user.id },
+    });
+
+    if (!userExist) throw new Error("User not Found");
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: user,
+    });
+
+    return {
+      success: true,
+      message: "User updated successfully",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: formatError(error),
+    };
+  }
+}
