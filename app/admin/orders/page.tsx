@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getAllOrders, deleteOrder } from "@/lib/actions/orderaction";
+import { getAllOrders, deleteOrder } from "@/lib/actions/order.actions";
 import { formatCurrency, formatDateTime, formatId } from "@/lib/utils";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";

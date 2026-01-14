@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getUserOrders } from "@/lib/actions/orderaction";
+import { getUserOrders } from "@/lib/actions/order.actions";
 import { formatCurrency, formatDateTime, formatId } from "@/lib/utils";
 import Link from "next/link";
 import {

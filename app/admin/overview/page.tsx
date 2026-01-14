@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getOrderSummary } from "@/lib/actions/orderaction";
+import { getOrderSummary } from "@/lib/actions/order.actions";
 import { requireAdmin } from "@/lib/auth-guard";
 import { formatCurrency, formatDateTime, formatNumber } from "@/lib/utils";
 import { BadgeDollarSign, Barcode, CreditCard, Users } from "lucide-react";

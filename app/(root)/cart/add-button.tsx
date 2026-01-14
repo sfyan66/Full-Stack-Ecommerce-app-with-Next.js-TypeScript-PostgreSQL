@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { CartItem } from "@/types";
-import { addItemToCart } from "@/lib/actions/cartaction";
+import { addItemToCart } from "@/lib/actions/cart.actions";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function AddButton({ item }: { item: CartItem }) {

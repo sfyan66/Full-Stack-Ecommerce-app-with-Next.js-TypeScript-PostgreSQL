@@ -1,5 +1,5 @@
 import UpdateProductForm from "./update-product-form";
-import { getProductById } from "@/lib/actions/productsaction";
+import { getProductById } from "@/lib/actions/product.actions";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/auth-guard";

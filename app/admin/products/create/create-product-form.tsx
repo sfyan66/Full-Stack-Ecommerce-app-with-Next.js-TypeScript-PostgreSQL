@@ -20,7 +20,7 @@ import { productDefaultValues } from "@/lib/constants";
 import Image from "next/image";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
-import { createProduct } from "@/lib/actions/productsaction";
+import { createProduct } from "@/lib/actions/product.actions";
 import slugify from "slugify";
 import { UploadButton } from "@/lib/uploadthing";
 import { Checkbox } from "@/components/ui/checkbox";

@@ -5,7 +5,7 @@ export const SERVER_URL = process.env.SERVER_URL || "http://localhost:3000";
 
 export const PAYMENT_METHOD = process.env.PAYMENT_METHOD
   ? process.env.PAYMENT_METHOD.split(", ")
-  : ["PayPal", "Stripe", "CreditCard", "CashOnDelivery"];
+  : ["PayPal", "Stripe", "CashOnDelivery"];
 export const DEFAULT_PAYMENT_METHOD =
   process.env.DEFAULT_PAYMENT_METHOD || "PayPal";
 
@@ -29,3 +29,9 @@ export const productDefaultValues = {
 export const USER_ROLES = process.env.USER_ROLES
   ? process.env.USER_ROLES.split(", ")
   : ["admin", "user"];
+
+export const reviewFormDefaultValues = {
+  title: "",
+  comment: "",
+  rating: 0,
+};

@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { paymentMethodSchema } from "@/lib/validations";
 import { DEFAULT_PAYMENT_METHOD, PAYMENT_METHOD } from "@/lib/constants";
-import updateUserPaymentMethod from "@/lib/actions/useraction";
+import updateUserPaymentMethod from "@/lib/actions/user.actions";
 import {
   Form,
   FormControl,

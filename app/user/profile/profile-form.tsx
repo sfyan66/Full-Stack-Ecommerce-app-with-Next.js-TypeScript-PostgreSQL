@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { updateProfile } from "@/lib/actions/useraction";
+import { updateProfile } from "@/lib/actions/user.actions";
 import { updateProfileSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";

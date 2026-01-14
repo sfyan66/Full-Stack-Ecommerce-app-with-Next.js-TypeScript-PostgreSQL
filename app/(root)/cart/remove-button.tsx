@@ -4,7 +4,7 @@ import { Loader, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTransition } from "react";
 import { toast } from "sonner";
-import { removeItemFromCart } from "@/lib/actions/cartaction";
+import { removeItemFromCart } from "@/lib/actions/cart.actions";
 import { CartItem } from "@/types";
 
 export default function RemoveButton({ item }: { item: CartItem }) {

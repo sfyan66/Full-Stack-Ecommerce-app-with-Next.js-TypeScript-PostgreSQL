@@ -20,7 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
-import { updateProduct } from "@/lib/actions/productsaction";
+import { updateProduct } from "@/lib/actions/product.actions";
 import slugify from "slugify";
 import { UploadButton } from "@/lib/uploadthing";
 import { Checkbox } from "@/components/ui/checkbox";

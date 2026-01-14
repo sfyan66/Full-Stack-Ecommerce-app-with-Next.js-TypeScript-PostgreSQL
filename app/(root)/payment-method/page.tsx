@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { auth } from "@/auth";
-import { getUserById } from "@/lib/actions/useraction";
+import { getUserById } from "@/lib/actions/user.actions";
 import CheckoutSteps from "@/components/shared/checkout-steps";
 import PaymentMethodForm from "./payment-method-form";
 

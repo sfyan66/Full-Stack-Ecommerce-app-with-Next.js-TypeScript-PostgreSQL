@@ -17,14 +17,20 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useTransition } from "react";
-import { deliverOrder, updateOrderToPaidAFF } from "@/lib/actions/orderaction";
+import {
+  deliverOrder,
+  updateOrderToPaidAFF,
+} from "@/lib/actions/order.actions";
+import StripePayment from "./stripe-payment";
 
 const OrderDetailsTable = ({
   order,
   isAdmin,
+  stripeClientSecret,
 }: {
   order: Omit<Order, "paymentResult">;
   isAdmin: boolean;
+  stripeClientSecret: string | null;
 }) => {
   const {
     id,
@@ -40,8 +46,6 @@ const OrderDetailsTable = ({
     paidAt,
     deliveredAt,
   } = order;
-
-  // const { toast } = useToast();
 
   // const PrintLoadingState = () => {
   //   const [{ isPending, isRejected }] = usePayPalScriptReducer();
@@ -59,10 +63,7 @@ const OrderDetailsTable = ({
   //   const res = await createPayPalOrder(order.id);
 
   //   if (!res.success) {
-  //     toast({
-  //       variant: 'destructive',
-  //       description: res.message,
-  //     });
+  //     toast.error(res.message,);
   //   }
 
   //   return res.data;
@@ -71,10 +72,11 @@ const OrderDetailsTable = ({
   // const handleApprovePayPalOrder = async (data: { orderID: string }) => {
   //   const res = await approvePayPalOrder(order.id, data);
 
-  //   toast({
-  //     variant: res.success ? 'default' : 'destructive',
-  //     description: res.message,
-  //   });
+  //   if(!res.success){
+  //      toast.error(res.message)
+  //   } else {
+  //      toast.success(res.message)
+  //   }
   // };
 
   const MarkAsPaidButton = () => {
@@ -231,13 +233,13 @@ const OrderDetailsTable = ({
               )}*/}
 
               {/* Stripe Payment */}
-              {/* {!isPaid && paymentMethod === 'Stripe' && stripeClientSecret && (
+              {!isPaid && paymentMethod === "Stripe" && stripeClientSecret && (
                 <StripePayment
                   priceInCents={Number(order.totalPrice) * 100}
                   orderId={order.id}
                   clientSecret={stripeClientSecret}
                 />
-              )} */}
+              )}
 
               {isAdmin && !isPaid && paymentMethod === "CashOnDelivery" && (
                 <MarkAsPaidButton />

@@ -1,8 +1,8 @@
 "use server";
 
 import { auth } from "@/auth";
-import { getUserById } from "./useraction";
-import { getCart } from "./cartaction";
+import { getUserById } from "./user.actions";
+import { getCart } from "./cart.actions";
 import { insertOrderSchema } from "../validations";
 import { prisma } from "@/db/prisma";
 import { CartItem, PaymentResult } from "@/types";
