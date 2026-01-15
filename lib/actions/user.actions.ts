@@ -8,7 +8,7 @@ import {
   paymentMethodSchema,
   updateUserSchema,
 } from "../validations";
-import { hashSync } from "bcrypt-ts-edge";
+import { hash } from "../encrypt";
 import { prisma } from "@/db/prisma";
 import { FormState, ShippingAddress } from "@/types";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
@@ -17,6 +17,7 @@ import { auth } from "@/auth";
 import z from "zod";
 import { PAGE_SIZE } from "../constants";
 import { Prisma } from "../generated/prisma/client";
+import { getCart } from "./cart.actions";
 
 export async function signInUser(prevState: FormState, formData: FormData) {
   try {
@@ -50,7 +51,7 @@ export async function signUpUser(prevState: FormState, formData: FormData) {
 
     const signingPassword = user.password;
 
-    user.password = hashSync(user.password, 10);
+    user.password = await hash(user.password);
 
     await prisma.user.create({
       data: {
@@ -80,7 +81,15 @@ export async function signUpUser(prevState: FormState, formData: FormData) {
 }
 
 export async function signOutUser() {
-  return signOut();
+  const currentCart = await getCart();
+
+  await prisma.cart.delete({
+    where: {
+      id: currentCart?.id,
+    },
+  });
+
+  await signOut();
 }
 
 export async function getUserById(userId: string) {

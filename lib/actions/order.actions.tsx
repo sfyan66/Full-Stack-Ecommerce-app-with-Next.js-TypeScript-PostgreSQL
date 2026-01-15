@@ -5,11 +5,12 @@ import { getUserById } from "./user.actions";
 import { getCart } from "./cart.actions";
 import { insertOrderSchema } from "../validations";
 import { prisma } from "@/db/prisma";
-import { CartItem, PaymentResult } from "@/types";
+import { CartItem, PaymentResult, ShippingAddress } from "@/types";
 import { formateDataToPlain, formatError } from "../utils";
 import { PAGE_SIZE } from "../constants";
 import { Prisma } from "../generated/prisma/client";
 import { revalidatePath } from "next/cache";
+import { sendPurchaseReceipt } from "@/email";
 
 export async function createOrder() {
   try {
@@ -286,6 +287,14 @@ export async function updateOrderToPaid({
   });
 
   if (!updatedOrder) throw new Error("Order not found");
+
+  // sendPurchaseReceipt({
+  //   order: {
+  //     ...updatedOrder,
+  //     shippingAddress: updatedOrder.shippingAddress as ShippingAddress,
+  //     paymentResult: updatedOrder.paymentResult as PaymentResult,
+  //   },
+  // });
 }
 
 export async function updateOrderToPaidAFF(orderId: string) {
