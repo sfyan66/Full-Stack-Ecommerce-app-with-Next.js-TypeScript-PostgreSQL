@@ -12,7 +12,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     error: "/sign-in",
   },
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
+    maxAge: 30 * 24 * 60 * 60,
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   adapter: PrismaAdapter(prisma) as any,
@@ -23,10 +24,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials) return null;
+        if (credentials == null) return null;
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email as string },
+        const user = await prisma.user.findFirst({
+          where: {
+            email: credentials.email as string,
+          },
         });
 
         if (user && user.password) {

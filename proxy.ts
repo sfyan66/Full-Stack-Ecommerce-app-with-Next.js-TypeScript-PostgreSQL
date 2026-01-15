@@ -1,1 +1,1 @@
-export { authConfig as proxy } from "@/auth.config";
+export { auth as proxy } from "@/auth";
