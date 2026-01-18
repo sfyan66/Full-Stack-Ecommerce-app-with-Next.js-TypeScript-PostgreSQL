@@ -91,10 +91,10 @@ export async function getAllProducts({
       sort === "lowest"
         ? { price: "asc" }
         : sort === "highest"
-        ? { price: "desc" }
-        : sort === "rating"
-        ? { rating: "desc" }
-        : { createdAt: "desc" },
+          ? { price: "desc" }
+          : sort === "rating"
+            ? { rating: "desc" }
+            : { createdAt: "desc" },
     skip: (page - 1) * limit,
     take: limit,
   });
@@ -146,11 +146,15 @@ export async function createProduct(data: z.infer<typeof insertproductSchema>) {
 
     revalidatePath("admin/products");
 
+    console.log("Product created successfully");
+
     return {
       success: true,
       message: "Product created successfully",
     };
   } catch (error) {
+    console.log((error as Error).message);
+
     return {
       success: false,
       message: formatError(error),
@@ -220,3 +224,5 @@ export async function getFeaturedProducts() {
 
   return formateDataToPlain(data);
 }
+
+export async function addFakeStoreAPIProducts() {}

@@ -9,13 +9,14 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div>
       <Card key={product.slug} className="h-full">
-        <CardHeader>
+        <CardHeader className="h-65 flex items-center">
           <Link href={`/products/${product.slug}`}>
             <Image
               src={product.images[0]}
               alt={product.images[1] ? product.images[1] : product.name}
               width={300}
               height={300}
+              className="max-h-65"
             />
           </Link>
         </CardHeader>

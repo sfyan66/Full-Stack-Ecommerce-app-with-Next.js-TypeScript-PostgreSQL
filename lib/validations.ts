@@ -132,3 +132,14 @@ export const insertReviewSchema = z.object({
     .min(1, "Rating must be at least 1")
     .max(5, "Rating must be at most 5"),
 });
+
+// export const insertFakeProductsSchema = z.object({
+//   id: z.string().min(1, "Id is required"),
+//   title: z.string().min(3, "Title must be at least 3 characters"),
+//   price: priceSchema,
+//   description: z.string().min(3, "Description must be at least 3 characters"),
+//   category: z.string().min(3,),
+//   image: z.string(),
+//   rating: z.string(),
+
+// })
