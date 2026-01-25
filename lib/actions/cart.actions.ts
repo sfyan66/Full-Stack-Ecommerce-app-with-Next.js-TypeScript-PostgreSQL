@@ -11,7 +11,7 @@ import { Prisma } from "../generated/prisma/client";
 
 const sumPrice = (items: CartItem[]) => {
   const itemsPrice = round2(
-    items.reduce((acc, item) => acc + Number(item.price) * item.qty, 0)
+    items.reduce((acc, item) => acc + Number(item.price) * item.qty, 0),
   );
   const shippingPrice = round2(itemsPrice > 100 ? 0 : 5);
   const taxPrice = round2(itemsPrice * 0.1);
@@ -62,7 +62,7 @@ export async function addItemToCart(data: CartItem) {
       };
     } else {
       const existItem = (cart.items as CartItem[]).find(
-        (e) => e.productId === item.productId
+        (e) => e.productId === item.productId,
       );
 
       if (existItem) {
@@ -71,7 +71,7 @@ export async function addItemToCart(data: CartItem) {
         }
 
         (cart.items as CartItem[]).find(
-          (e) => e.productId === item.productId
+          (e) => e.productId === item.productId,
         )!.qty = existItem.qty + 1;
       } else {
         if (product.stock < 1) throw new Error("Not enough quantity");
@@ -141,13 +141,13 @@ export async function removeItemFromCart(productId: string) {
     if (!cart) throw new Error("Cart was not found");
 
     const existItem = (cart.items as CartItem[]).find(
-      (e) => e.productId === productId
+      (e) => e.productId === productId,
     );
     if (!existItem) throw new Error("Item was not found");
 
     if (existItem.qty === 1) {
       cart.items = (cart.items as CartItem[]).filter(
-        (e) => e.productId !== productId
+        (e) => e.productId !== productId,
       );
     } else {
       (cart.items as CartItem[]).find((e) => e.productId === productId)!.qty =

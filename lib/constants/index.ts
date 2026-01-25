@@ -32,8 +32,10 @@ export const USER_ROLES = process.env.USER_ROLES
 
 export const reviewFormDefaultValues = {
   title: "",
-  comment: "",
-  rating: 0,
+  description: "",
+  productId: "",
+  userId: "",
+  rating: 1,
 };
 
 export const SENDER_EMAIL = process.env.SENDER_EMAIL || "onboarding@resend.dev";

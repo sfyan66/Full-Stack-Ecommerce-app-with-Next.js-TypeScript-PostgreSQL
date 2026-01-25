@@ -73,7 +73,7 @@ const ReviewForm = ({
 
   // Submit Form Handler
   const onSubmit: SubmitHandler<z.infer<typeof insertReviewSchema>> = async (
-    values
+    values,
   ) => {
     const res = await createUpdateReview({ ...values, productId });
 
@@ -93,7 +93,7 @@ const ReviewForm = ({
       <Button onClick={handleOpenForm} variant="default">
         Write a Review
       </Button>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-106.25">
         <Form {...form}>
           <form method="post" onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader>
@@ -137,8 +137,8 @@ const ReviewForm = ({
                     <FormItem>
                       <FormLabel>Rating</FormLabel>
                       <Select
-                        onValueChange={field.onChange}
                         value={field.value.toString()}
+                        onValueChange={(v) => field.onChange(Number(v))}
                       >
                         <FormControl>
                           <SelectTrigger>
